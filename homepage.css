@@ -1,0 +1,14 @@
+Body { background-color:gold;
+h1 font-family:arial;
+ h1 color:blueblack;
+ h1 font-style:italic;
+ p font-family:arial;
+ p color:blueblack;
+ p font-style:italic;
+ h5 font-family:arial;
+ h5 color:blueblack;
+ h5 font-style:italic;
+ table, th, td   border: 3px solid black;  
+   table, th, td  border-collapse: collapse ;
+ table, th, td border-styl:hidden;
+}
