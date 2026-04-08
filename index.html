@@ -69,19 +69,32 @@ WE SERVE THESE MEALS
 <div>
 <script>
 function buyNow() {
-let quantity = prompt("Enter quantity:");
+    let quantity = parseInt(prompt("Enter quantity:"));
 
-if (quantity !==null && quantity > 0) { 
-let pricePerItem = 120;
-let total = quantity * pricePerItem;
+    if (!isNaN(quantity) && quantity > 0) {
+        let pricePerItem = 120;
+        let total = quantity * pricePerItem;
 
-alert  ("Total amount: ghc" + total);
+        let handler = PaystackPop.setup({
+            key: 'YOUR_PUBLIC_KEY_HERE',  // replace this
+            email: 'customer@email.com', // you can collect this
+            amount: total * 100, // convert to pesewas
+            currency: "GHS",
 
- window. location.href = "payment.html?qty=" +quantity "&total onclick="buyNow()";
-  } else {
-  alert ("Please enter a valid quantity.");
-  }
- }
+            callback: function(response) {
+                alert("Payment successful! Reference: " + response.reference);
+            },
+
+            onClose: function() {
+                alert("Transaction cancelled");
+            }
+        });
+
+        handler.openIframe();
+    } else {
+        alert("Enter a valid quantity");
+    }
+}
 </script>
 
 <div style="overflow-x: auto;">
@@ -129,19 +142,36 @@ alert  ("Total amount: ghc" + total);
 </div>
 <script>
 function orderNow() {
-let quantity = prompt("Enter quantity:");
+    let quantity = parseInt(prompt("Enter quantity:"));
 
-if (quantity !==null && quantity > 0) { 
-let pricePerItem = 50;
-let total = quantity * pricePerItem;
+    if (!isNaN(quantity) && quantity > 0) {
+        let pricePerItem = 50;
+        let total = quantity * pricePerItem;
 
-alert  ("Total amount: ghc" + total);
+        let handler = PaystackPop.setup({
+            key: 'YOUR_PUBLIC_KEY_HERE', // 🔴 replace with your Paystack public key
+            email: 'customer@email.com', // you can collect this later
+            amount: total * 100, // convert GHS to pesewas
+            currency: "GHS",
 
- window. location.href = "payment.html?qty=" +quantity "&total onclick="buyNow()"";
-  } else {
-  alert ("Please enter a valid quantity.");
-  }
- }
+            callback: function(response) {
+                alert("Payment successful! Reference: " + response.reference);
+                
+                // Optional redirect after payment
+                window.location.href = "success.html";
+            },
+
+            onClose: function() {
+                alert("Transaction cancelled");
+            }
+        });
+
+        handler.openIframe();
+
+    } else {
+        alert("Please enter a valid quantity.");
+    }
+}
 </script>
 <!--
 <tr>
